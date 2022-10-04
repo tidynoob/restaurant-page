@@ -19,7 +19,11 @@
   },
   "homepage": "https://github.com/tidynoob/restaurant-page#readme",
   "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.2"
   }
 }
