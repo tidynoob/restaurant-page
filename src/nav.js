@@ -1,58 +1,72 @@
-import logo from './cat.svg';
+// import logo from './cat.svg';
 var fp = require('lodash/fp');
 
-const navClasses = ['navbar', 'py-3', 'mb-4', 'border-bottom'];
-const containerClasses = ['container'];
-const aClasses = ['navbar-brand', 'd-flex', 'align-items-center', 'gap-1'];
-const imgClasses = ['align-middle'];
-const spanClasses = ['fs-4'];
-const ulClasses = ['nav','nav-pills','gap-3'];
-const tabs = ['home','menu','contact'];
-const tabClasses = ['nav-item'];
+// Everything will be inserted before the content node
 const content = document.getElementById('content');
 
+// Create base nav bar
 const nav = document.createElement('nav');
+const navClasses = ['navbar'];
 nav.classList.add(...navClasses);
+nav.role = 'navigation';
+nav.ariaLabel = 'Main navigation';
 
-const container = document.createElement('div');
-container.classList.add(...containerClasses);
+// Create container to limit width of nav bar
+const navContainer = document.createElement('div');
+const navContainerClasses = ['container', 'is-max-desktop'];
+navContainer.classList.add(...navContainerClasses);
 
-const a = document.createElement('a');
-a.classList.add(...aClasses);
-a.href = '#';
+// Create navbar brand
+const brand = document.createElement('div');
+brand.classList.add('navbar-brand');
+const aBrand = document.createElement('a');
+aBrand.classList.add('navbar-item','title','mb-0');
+aBrand.href = '#';
+aBrand.textContent = 'Cat Cafe';
+brand.appendChild(aBrand);
 
-const myImg = new Image();
-myImg.src = logo;
-myImg.classList.add(imgClasses);
-
+// Create navbar burger for touch devices
+const burger = document.createElement('a');
+burger.classList.add('navbar-burger');
+burger.role = 'button';
+burger.ariaLabel = 'menu';
+burger.ariaExpanded = 'false';
+burger.dataset.target = 'navbarMenu';
 const span = document.createElement('span');
-span.classList.add(...spanClasses);
-span.textContent = 'Cat Cafe';
+span.ariaHidden = 'true';
+span.textContent = '';
+burger.appendChild(span);
+burger.appendChild(span.cloneNode(true));
+burger.appendChild(span.cloneNode(true));
+brand.appendChild(burger);
 
-a.appendChild(myImg);
-a.appendChild(span);
+// create navbar menu
+const menu = document.createElement('div');
+menu.classList.add('navbar-menu');
+menu.id = 'navbarMenu';
 
-const ul = document.createElement('ul');
-ul.classList.add(...ulClasses);
+// create navbar start/end
+const navStart = document.createElement('div');
+navStart.classList.add('navbar-end');
+const navItem = document.createElement('a');
+navItem.classList.add('navbar-item');
+navItem.textContent = 'Home';
+navStart.appendChild(navItem.cloneNode(true));
+navItem.textContent = 'Menu';
+navStart.appendChild(navItem.cloneNode(true));
+navItem.textContent = 'Contact';
+navStart.appendChild(navItem.cloneNode(true));
+menu.appendChild(navStart);
 
-tabs.forEach(tab => {
-    // console.log(tab);
-    const li = document.createElement('li');
-    li.classList.add(...tabClasses);
-    const a = document.createElement('a');
-    if (tab === 'home') {
-        a.classList.add('active','nav-link');
-    }
-    a.textContent = tab;
-    a.href = '#';
-    li.appendChild(a);
-    ul.appendChild(li);
-    // console.log(ul);
+navContainer.appendChild(brand);
+navContainer.appendChild(menu);
+
+nav.appendChild(navContainer);
+
+burger.addEventListener('click', (e) => {
+    burger.classList.toggle('is-active');
+    menu.classList.toggle('is-active');
 });
-
-container.appendChild(a);
-container.appendChild(ul);
-nav.appendChild(container);
 
 const bindInsert = fp.bind(content.parentNode.insertBefore)(content.parentNode);
 const insertBeforeContent = fp.curryRight(bindInsert)(content);

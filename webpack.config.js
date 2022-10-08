@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const miniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'development',
@@ -7,8 +8,9 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Cat Cafe',
-            template: 'src/index.html'
+            template: './src/index.html'
         }),
+        new miniCssExtractPlugin({filename: 'css/style.css'}),
     ],
     output: {
         filename: 'main.js',
@@ -21,6 +23,21 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    miniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                        }
+                    }
+                ]
             },
             {
                 test: /\.css$/i,
