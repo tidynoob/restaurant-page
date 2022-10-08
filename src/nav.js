@@ -51,10 +51,13 @@ navStart.classList.add('navbar-end');
 const navItem = document.createElement('a');
 navItem.classList.add('navbar-item');
 navItem.textContent = 'Home';
+navItem.id = 'homeButton';
 navStart.appendChild(navItem.cloneNode(true));
 navItem.textContent = 'Menu';
+navItem.id = 'menuButton';
 navStart.appendChild(navItem.cloneNode(true));
 navItem.textContent = 'Contact';
+navItem.id = 'contactButton';
 navStart.appendChild(navItem.cloneNode(true));
 menu.appendChild(navStart);
 
