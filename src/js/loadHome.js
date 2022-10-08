@@ -1,5 +1,6 @@
-import meow from './meow.jpg';
-import clearContent from './clearContent';
+import meow from '../meow.jpg';
+import clearContent from '../js/clearContent';
+import appendToContent from '../js/appendToContent';
 var fp = require('lodash/fp');
 
 const div = document.getElementById('content');
@@ -30,12 +31,10 @@ divColumn.appendChild(p);
 columnsDiv.appendChild(imgDiv);
 columnsDiv.appendChild(divColumn);
 
-const appendToDiv = fp.bind(div.appendChild)(div);
-
 const loadHome = () => {
 
     clearContent();
-    fp.forEach(appendToDiv)([columnsDiv]);
+    fp.forEach(appendToContent)([columnsDiv]);
 }
 
 export default loadHome;

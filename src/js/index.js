@@ -1,6 +1,6 @@
-import './style.scss';
-import loadNav from './nav';
-import loadHome from './loadHome';
+import '../style.scss';
+import loadNav from '../js/nav';
+import loadHome from '../js/loadHome';
 
 document.addEventListener('DOMContentLoaded', (e) => {
     loadNav();
