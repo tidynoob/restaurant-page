@@ -1,40 +1,52 @@
-import meow from '../meow.jpg';
 import clearContent from '../js/clearContent';
 import appendToContent from '../js/appendToContent';
 var fp = require('lodash/fp');
 
-const div = document.getElementById('content');
-const columnsDiv = document.createElement('div');
-columnsDiv.classList.add('columns','box','mt-4');
-columnsDiv.id = 'home';
+const foodItem = (name, description) => {
+    const getName = () => name;
+    const getDescription = () => description;
+    return {getName, getDescription};
+}
 
-const imgDiv = document.createElement('div');
-const img = new Image();
-img.src = meow;
-imgDiv.classList.add('column','image');
-imgDiv.appendChild(img);
+const food = [
+    foodItem('Meow Mix', 'Your standard cat food.'),
+    foodItem('Tuna', 'A can of tuna.'),
+    foodItem('Catnip', 'A bag of catnip.'),
+    foodItem('Tasty Treats', 'A bag of tasty treats.'),
+]
 
-const divColumn = document.createElement('div');
-divColumn.classList.add('column',);
-const h1 = document.createElement('h1');
-h1.classList.add('title');
-h1.textContent = 'Meow Meows';
-const h2 = document.createElement('h2');
-h2.classList.add('subtitle');
-h2.textContent = 'The Snackiest Snacks';
-const p = document.createElement('p');
-p.textContent = 'Our treats will keep you purring for more!';
-divColumn.appendChild(h1);
-divColumn.appendChild(h2);
-divColumn.appendChild(p);
+const cardsDiv = document.createElement('div');
+cardsDiv.id = 'cardsGrid';
+// cardsDiv.classList.add('box');
 
-columnsDiv.appendChild(imgDiv);
-columnsDiv.appendChild(divColumn);
+food.forEach((item) => {
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    const cardHeader = document.createElement('header');
+    cardHeader.classList.add('card-header');
+    const cardHeaderTitle = document.createElement('p');
+    cardHeaderTitle.classList.add('card-header-title');
+    cardHeaderTitle.textContent = item.getName();
+    cardHeader.appendChild(cardHeaderTitle);
+
+    const cardDescription = document.createElement('div');
+    cardDescription.classList.add('card-content');
+    const cardDescriptionContent = document.createElement('p');
+    cardDescriptionContent.classList.add('content');
+    cardDescriptionContent.textContent = item.getDescription();
+    cardDescription.appendChild(cardDescriptionContent);
+
+    card.appendChild(cardHeader);
+    card.appendChild(cardDescription);
+
+    cardsDiv.appendChild(card);
+});
 
 const loadMenu = () => {
 
     clearContent();
-    fp.forEach(appendToContent)([columnsDiv]);
+    fp.forEach(appendToContent)([cardsDiv]);
 }
 
 export default loadMenu;

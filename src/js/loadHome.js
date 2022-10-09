@@ -5,7 +5,7 @@ var fp = require('lodash/fp');
 
 const div = document.getElementById('content');
 const columnsDiv = document.createElement('div');
-columnsDiv.classList.add('columns','box','mt-4');
+columnsDiv.classList.add('columns','box');
 columnsDiv.id = 'home';
 
 const imgDiv = document.createElement('div');

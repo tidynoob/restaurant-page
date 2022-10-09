@@ -1,6 +1,7 @@
 import '../style.scss';
 import loadNav from '../js/nav';
 import loadHome from '../js/loadHome';
+import loadMenu from '../js/loadMenu';
 
 document.addEventListener('DOMContentLoaded', (e) => {
     loadNav();
@@ -10,7 +11,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
     homeButton.addEventListener('click', () => loadHome());
 
     const menuButton = document.getElementById('menuButton');
-    // menuButton.addEventListener('click', () => loadMenu());
+    menuButton.addEventListener('click', () => loadMenu());
+    console.log('DOM fully loaded and parsed');
 
     const contactButton = document.getElementById('contactButton');
     
